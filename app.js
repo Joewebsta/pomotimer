@@ -1,42 +1,47 @@
 const displayMinutes = document.querySelector('.min');
 const displaySeconds = document.querySelector('.sec');
-const startStopBtn = document.querySelector('.start-stop');
-
+const startPauseBtn = document.querySelector('.start-pause');
+var intervalId;
 
 function pauseTimer() {
-  startStopBtn.setAttribute('data-mode', 'active');
-  startStopBtn.textContent = 'Pause';
+  startPauseBtn.setAttribute('data-mode', 'inactive');
+  startPauseBtn.textContent = 'Start';
 }
 
 function startTimer() {
-    startStopBtn.setAttribute('data-mode', 'inactive');
-    startStopBtn.textContent = 'Start';
+  startPauseBtn.setAttribute('data-mode', 'active');
+  startPauseBtn.textContent = 'Pause';
 }
 
-function startStopTimer() {
+function toggleTimer() {
   let sec = displaySeconds.textContent;
   let min = displayMinutes.textContent;
-  
-  const timerMode = startStopBtn.getAttribute(['data-mode']);
-  (timerMode === 'inactive') ? pauseTimer() : startTimer();
-  
-  
-  setInterval(() => {
-    sec--;
+  const timerMode = startPauseBtn.getAttribute(['data-mode']);
 
-    if (sec < 0) {
-      sec = 59;
-      min--;
-    }
-
-    if (sec >= 0 && sec < 10) {
-      sec = "0" + sec;
-    }
+  if (timerMode === 'inactive') {
     
-    displaySeconds.textContent = sec;
-    displayMinutes.textContent = min;
-  }, 1000);
+    startTimer(); 
 
+    intervalId = setInterval(() => {
+      sec--;
+
+      if (sec < 0) {
+        sec = 59;
+        min--;
+      }
+
+      if (sec >= 0 && sec < 10) {
+        sec = "0" + sec;
+      }
+      
+      displaySeconds.textContent = sec;
+      displayMinutes.textContent = min;
+    }, 1000);
+    
+  } else {
+    clearInterval(intervalId);
+    pauseTimer();
+  }
 }
 
-startStopBtn.addEventListener('click', startStopTimer);
+startPauseBtn.addEventListener('click', toggleTimer);
