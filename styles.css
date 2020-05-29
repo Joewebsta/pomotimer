@@ -1,0 +1,61 @@
+@import url('https://fonts.googleapis.com/css2?family=Overpass+Mono:wght@400;700&display=swap');
+
+body, button {
+  font-family: 'Overpass Mono', monospace;
+}
+
+body {
+  margin: 0;
+  border: 10px solid #f9f9fa;
+  background: #e74c3c;
+  
+  display: flex;
+  height: calc(100vh - 20px);
+  justify-content: center;
+  align-items: center;
+}
+
+.pomotimer {
+  text-align: center;
+}
+
+h1 {
+  color: #e74c3c;
+  background: #f9f9fa;
+  
+  height: 140px;
+  display: flex;
+  align-items: center;
+  font-weight: 700;
+  font-size: 112px;
+  border-radius: 3px;
+  padding: 0 40px;
+  margin: 0 0 40px;
+}
+
+span.colon {
+  vertical-align: text-bottom;
+}
+
+button {
+  text-transform: uppercase;
+  width: 150px;
+  padding: 10px;
+  font-size: 17px;
+  font-weight: 700;
+  background: #c0392b;
+  border: none;
+  color: white;
+}
+
+button:focus {
+  outline: none;
+}
+
+button:hover{
+  cursor: pointer;
+}
+
+button.start-pause {
+  margin-right: 20px;
+}
