@@ -2,8 +2,8 @@ const displayMinutes = document.querySelector('.min');
 const displaySeconds = document.querySelector('.sec');
 const startPauseBtn = document.querySelector('.start-pause');
 const resetBtn = document.querySelector('.reset');
+let min = 00;
 let sec = 05;
-let min = 1;
 let timerIntervalId;
 
 function updateStartPauseBtn() {
@@ -58,6 +58,10 @@ function formatSingleDigits() {
 }
 
 function updateTimerText() {
+  if (+min === 0 && +sec === 1) {
+    clearInterval(timerIntervalId);
+  }
+
   sec--;
   formatSingleDigits();
   displayTime();
