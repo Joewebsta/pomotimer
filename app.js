@@ -2,12 +2,12 @@ const displayMinutes = document.querySelector('.min');
 const displaySeconds = document.querySelector('.sec');
 const startPauseBtn = document.querySelector('.start-pause');
 const resetBtn = document.querySelector('.reset');
-let min = 00;
-let sec = 05;
+let min = displayMinutes.textContent;
+let sec = displaySeconds.textContent;
 let timerIntervalId;
 
 function updateStartPauseBtn() {
-  const timerMode = startPauseBtn.getAttribute(['data-mode']);
+  const timerMode = startPauseBtn.dataset.mode;
   
   if( timerMode === 'active') {
     startPauseBtn.dataset.mode = 'inactive';
@@ -18,10 +18,15 @@ function updateStartPauseBtn() {
   }
 }
 
+function disableResetBtn(state) {
+  resetBtn.disabled = state;
+}
+
 function startTimer() {
-  resetBtn.disabled = false;
+  
   timerIntervalId = setInterval(updateTimerText, 1000);
   updateStartPauseBtn(); 
+  disableResetBtn(false);
 }
 
 function pauseTimer() {
@@ -30,13 +35,14 @@ function pauseTimer() {
 }
 
 function resetTimer() {
+  const timerMode = startPauseBtn.dataset.mode;
+
   clearInterval(timerIntervalId);
   sec = 0;
   min = 25;
   formatSingleDigits();
   displayTime();
-  updateStartPauseBtn();
-  resetBtn.disabled = true;
+  disableResetBtn(true);
 }
 
 function displayTime() {
