@@ -19,6 +19,7 @@ function updateStartPauseBtn() {
 }
 
 function startTimer() {
+  resetBtn.disabled = false;
   timerIntervalId = setInterval(updateTimerText, 1000);
   updateStartPauseBtn(); 
 }
@@ -35,6 +36,7 @@ function resetTimer() {
   formatSingleDigits();
   displayTime();
   updateStartPauseBtn();
+  resetBtn.disabled = true;
 }
 
 function displayTime() {
